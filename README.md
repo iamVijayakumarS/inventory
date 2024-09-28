@@ -27,8 +27,7 @@ Installation :
 
 Steps to Set Up :
 
-git clone <repository-url>
-cd <repository-directory>
+git clone [<repository-url>](https://github.com/iamVijayakumarS/inventory)
 
 
 STEP 2 : 
@@ -46,3 +45,72 @@ python manage.py runserver
 API ENDPOINTS : 
 
 BASEPATH = http://127.0.0.1:8000/
+
+EG :  http://127.0.0.1:8000{Endpoint}
+
+
+User Registration
+Endpoint: /register/
+Method: POST
+Request Body: {
+    "username": "example_username",
+    "password": "example_password"
+}
+
+
+User Login
+Endpoint: /login/
+Method: POST
+Request Body:
+{
+    "username": "example_username",
+    "password": "example_password"
+}
+
+Item Management :
+
+Token Authentication
+   For endpoints that require authentication (like item creation, updating, deleting, or retrieving), include the JWT token in the Authorization header
+
+Header:
+   Authorization: Bearer <access_token>  - get the access token from the succesfull loggedin response
+
+Create Item :
+   Endpoint: /items/
+   Method: POST
+   Header: Authorization: Bearer <access_token>
+   Request Body : {
+      "name": "Item Name",
+      "description": "Item Description"
+   }
+
+Get Item :
+   Header: Authorization: Bearer <access_token>
+   Endpoint: /items/1/
+   Method: GET
+
+Update Item :
+   Header: Authorization: Bearer <access_token>
+   Endpoint: /items/1/
+   Method: PUT
+      Request Body : {
+      "name": "Item Name - Updated",
+      "description": "Item Description - Updated"
+   }
+
+Delete Item :
+   Header: Authorization: Bearer <access_token>
+   Endpoint: /items/1/
+   Method: DELETE
+
+
+Caching :
+   The application uses Redis for caching item data to improve performance. Cached items are stored for 15 minutes.
+
+Testing :
+   To run the test suite, use the following command:
+   python manage.py test.
+
+Logging :
+   The application logs important actions, such as user registration attempts and authentication, using Python's built-in logging module.
+
